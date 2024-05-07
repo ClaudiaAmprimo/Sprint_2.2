@@ -64,9 +64,9 @@ var products = [
     }
 ]
 
-// => Reminder, it's extremely important that you debug your code. 
+// => Reminder, it's extremely important that you debug your code.
 // ** It will save you a lot of time and frustration!
-// ** You'll understand the code better than with console.log(), and you'll also find errors faster. 
+// ** You'll understand the code better than with console.log(), and you'll also find errors faster.
 // ** Don't hesitate to seek help from your peers or your mentor if you still struggle with debugging.
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
@@ -78,8 +78,18 @@ var total = 0;
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
+    let productoEncontrado = products.find((producto) => producto.id === id)
+    let productoCart = cart.find((product) => product.id === id)
+      if (productoCart) {
+        productoCart.quantity += 1;
+      } else {
+        let nuevoProducto = {
+          ...productoEncontrado,
+          quantity : 1
+        }
+        cart.push(nuevoProducto);
+      }
 }
-
 // Exercise 2
 function cleanCart() {
 
