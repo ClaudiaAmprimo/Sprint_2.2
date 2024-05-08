@@ -89,21 +89,51 @@ function buy(id) {
         }
         cart.push(nuevoProducto);
       }
+      calculateTotal()
 }
 // Exercise 2
 function cleanCart() {
-
+  cart.splice(0, cart.length);
+  let cartList = document.getElementById('cart_list');
+  cartList.innerHTML = "";
+  total_price.innerHTML = ""
+  console.log(cart)
 }
 
 // Exercise 3
 function calculateTotal() {
-    // Calculate total price of the cart using the "cartList" array
+  // Calculate total price of the cart using the "cartList" array
+  applyPromotionsCart()
+  total = 0;
+  let total_price = document.getElementById("total_price")
+  for (let product of cart) {
+    let subtotal =  parseFloat(product.subtotalWithDiscount).toFixed(2)
+    total += subtotal
+  }
+  total_price.innerHTML = parseFloat(total).toFixed(2)
 }
 
 // Exercise 4
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+  for (let product of cart){
+    let discountPercentage = 0
+    if (product.name === 'cooking oil' && product.quantity >= 3) {
+      discountPercentage =  20
+    } else if (product.name === 'Instant cupcake mixture' && product.quantity >= 10){
+      discountPercentage = 30
+    }
+
+    if (discountPercentage > 0) {
+      let discount = product.price * (discountPercentage / 100)
+      product.subtotalWithDiscount =  ((product.price - discount) * product.quantity).toFixed(2);
+    } else {
+      product.subtotalWithDiscount = (product.price * product.quantity).toFixed(2);
+    }
+    console.log(product.subtotalWithDiscount)
+  }
 }
+
 
 // Exercise 5
 function printCart() {
