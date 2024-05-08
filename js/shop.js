@@ -138,6 +138,18 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    let cartList = document.getElementById("cart_list")
+    cartList.innerHTML = ""
+      for (item of cart){
+        let row = `<tr>
+        <th scope="row">${item.name}</th>
+        <td>${item.price}</td>
+        <td>${item.quantity}</td>
+        <td>${item.subtotalWithDiscount}</td>
+        </tr>`;
+        cartList.innerHTML += row;
+      }
+      calculateTotal()
 }
 
 
