@@ -118,10 +118,10 @@ function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
   for (let product of cart){
     let discountPercentage = 0
-    if (product.name === 'cooking oil' && product.quantity >= 3) {
-      discountPercentage =  20
-    } else if (product.name === 'Instant cupcake mixture' && product.quantity >= 10){
-      discountPercentage = 30
+    if (product.id === 1 && product.quantity >= 3) {
+      discountPercentage =  product.offer.percent
+    } else if (product.id === 3 && product.quantity >= 10){
+      discountPercentage = product.offer.percent
     }
 
     if (discountPercentage > 0) {
@@ -146,18 +146,27 @@ function printCart() {
         <td>${item.price}</td>
         <td>${item.quantity}</td>
         <td>${item.subtotalWithDiscount}</td>
+        <td><button type="button" class="btn btn-outline-danger" onclick="removeFromCart(${item.id})">Delete</button></td>
         </tr>`;
         cartList.innerHTML += row;
       }
       calculateTotal()
 }
 
-
 // ** Nivell II **
 
 // Exercise 7
 function removeFromCart(id) {
-
+  let index = cart.findIndex((item) => item.id === id);
+  if (index !== -1){
+    if (cart[index].quantity > 1){
+      cart[index].quantity -= 1
+      calculateTotal();
+    } else {
+      cart.splice(index, 1)
+    }
+    printCart();
+  }
 }
 
 function open_modal() {

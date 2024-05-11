@@ -4,10 +4,10 @@ function validate(event) {
   event.preventDefault();
 	let error = 0;
   const expresionesRegulares = {
-    name : /^[a-zA-Z\s]+$/, //deben contener sólo letras
-    phone : /^\d{9}$/, //debe contener sólo números
-    password : /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,8}$/, //debe incluir números y letras
-    email : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ //debe tener formato de email
+    name : /^[a-zA-Z\s]+$/, //must contain letters only
+    phone : /^\d{9}$/, //must contain 9 numbers
+    password : /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,8}$/, //numbers and letters between 4 and 8 characters
+    email : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ //email format
   }
 	// Get the input fields
 	let fName = document.getElementById("fName");
