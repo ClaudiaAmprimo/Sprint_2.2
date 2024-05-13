@@ -74,30 +74,37 @@ var cart = [];
 
 var total = 0;
 
+let counter = 0;
+
 // Exercise 1
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
+    let count_product = document.getElementById("count_product");
     let productoEncontrado = products.find((producto) => producto.id === id)
     let productoCart = cart.find((product) => product.id === id)
       if (productoCart) {
         productoCart.quantity += 1;
+        counter++
       } else {
         let nuevoProducto = {
           ...productoEncontrado,
           quantity : 1
         }
+        counter++
         cart.push(nuevoProducto);
       }
+      count_product.innerHTML = counter;
       calculateTotal()
 }
 // Exercise 2
 function cleanCart() {
   cart.splice(0, cart.length);
+  let count_product = document.getElementById("count_product");
   let cartList = document.getElementById('cart_list');
   cartList.innerHTML = "";
-  total_price.innerHTML = ""
-  console.log(cart)
+  total_price.innerHTML = "";
+  count_product.innerHTML = 0;
 }
 
 // Exercise 3
@@ -130,7 +137,6 @@ function applyPromotionsCart() {
     } else {
       product.subtotalWithDiscount = (product.price * product.quantity).toFixed(2);
     }
-    console.log(product.subtotalWithDiscount)
   }
 }
 
@@ -138,7 +144,8 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
-    let cartList = document.getElementById("cart_list")
+    let count_product = document.getElementById("count_product");
+    let cartList = document.getElementById("cart_list");
     cartList.innerHTML = ""
       for (item of cart){
         let row = `<tr>
@@ -150,6 +157,7 @@ function printCart() {
         </tr>`;
         cartList.innerHTML += row;
       }
+      count_product.innerHTML = counter
       calculateTotal()
 }
 
@@ -157,14 +165,18 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
+  let count_product = document.getElementById("count_product");
   let index = cart.findIndex((item) => item.id === id);
   if (index !== -1){
     if (cart[index].quantity > 1){
       cart[index].quantity -= 1
+      counter--
       calculateTotal();
     } else {
       cart.splice(index, 1)
+      counter--
     }
+    count_product.innerHTML = counter;
     printCart();
   }
 }
